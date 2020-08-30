@@ -24,18 +24,18 @@ You can see the final project here in CodeSandbox:
 
 Suppose we have a box component that looks like this:
 
-```
+```jsx
 const Card = () => (
-  <div className="card">
-    <div className="header">Focusable box</div>
-    <div className="content">
-      <label for="fname">First name:</label>
-      <input type="text" id="fname" name="fname" />
-      <div className="space" />
-      <label for="lname">Last name:</label>
-      <input type="text" id="lname" name="lname" />
+    <div className="card">
+        <div className="header">Focusable box</div>
+        <div className="content">
+            <label for="fname">First name:</label>
+            <input type="text" id="fname" name="fname" />
+            <div className="space" />
+            <label for="lname">Last name:</label>
+            <input type="text" id="lname" name="lname" />
+        </div>
     </div>
-  </div>
 );
 ```
 
@@ -49,13 +49,13 @@ There are several things we want to achieve:
 
 This is the easiest part as we can use the `:hover` pseudo-class:
 
-```
+```css
 .card:hover {
-  box-shadow: 0 1px 9px 0 #cccccc;
+    box-shadow: 0 1px 9px 0 #cccccc;
 
-  .header {
-    background-color: #32e0c4;
-  }
+    .header {
+        background-color: #32e0c4;
+    }
 }
 ```
 
@@ -63,13 +63,14 @@ This is the easiest part as we can use the `:hover` pseudo-class:
 
 To give the Card the same style when one of its input fields have focus, we can use another pseudo-class called :focus-within:
 
-```
-.card:hover, .card:focus-within {
-  box-shadow: 0 1px 9px 0 #cccccc;
+```css
+.card:hover,
+.card:focus-within {
+    box-shadow: 0 1px 9px 0 #cccccc;
 
-  .header {
-    background-color: #32e0c4;
-  }
+    .header {
+        background-color: #32e0c4;
+    }
 }
 ```
 
@@ -81,10 +82,8 @@ As for the browser compatibility, `:focus-within` is available in all modern bro
 
 Normally `<div>` elements cannot receive focus either from keyboard events (through tab key) or from mouse clicks. To make the `<div>` element focusable, we need to add `tabIndex={0}` attribute to it.
 
-```
-<div className="card" tabIndex={0}>
-  ...
-</div>
+```html
+<div className="card" tabindex="{0}">...</div>
 ```
 
 And that's it!
