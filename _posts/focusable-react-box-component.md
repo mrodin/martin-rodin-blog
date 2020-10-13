@@ -1,6 +1,6 @@
 ---
 title: "How to make focusable React box components with ease"
-excerpt: ""
+excerpt: "Read on if you want to find out how to apply a style to a component that is focused or has a focused element within. All using a little CSS."
 coverImage: "/assets/blog/covers/react-focusable-box-component.jpg"
 date: "2020-06-13T05:35:07.322Z"
 author:
@@ -41,9 +41,9 @@ const Card = () => (
 
 There are several things we want to achieve:
 
--   Give the Card component some unique style when the user hovers over it
--   Apply the same style also when the user is typing in the input field inside the Card component (i.e. the input field has a focus)
--   Optionally - we want to make the Card component itself focusable so that the styles are applied also when the user clicks on the Card (outside the input field)
+-   give the Card component some unique style when the user hovers over it
+-   apply the same style also when the user is typing in the input field inside the Card component (i.e. the input field has a focus)
+-   optionally - we want to make the Card component itself focusable so that the styles are applied also when the user clicks on the Card (outside the input field)
 
 ## Applying styles on component hover
 

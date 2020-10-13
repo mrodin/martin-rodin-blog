@@ -1,6 +1,22 @@
 @tailwind base;
 
 /* Write your own custom base styles here */
+ul {
+    /* list-style-position: inside; */
+    /* list-style-type: "\1F449"; */
+    margin-left: 30px;
+}
+
+ul li {
+    list-style: none;
+    position: relative;
+}
+
+ul li::before {
+    content: "\1F449";
+    position: absolute;
+    left: -30px;
+}
 
 /* Start purging... */
 @tailwind components;
