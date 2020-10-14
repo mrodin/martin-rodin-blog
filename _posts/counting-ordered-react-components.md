@@ -1,0 +1,146 @@
+---
+title: "Counting ordered React components"
+excerpt: "Have you ever needed to count how many instances of a component is rendered on-screen and show this information to the user? Did you know that you can do this quite easily with a little CSS and few lines of code? Find out more in this article."
+coverImage: "/assets/blog/covers/counting-ordered-react-components.jpg"
+date: "2020-10-14T05:35:07.322Z"
+author:
+    name: Martin Rodin
+    picture: "/assets/blog/authors/martin.jpg"
+ogImage:
+    url: "/assets/blog/covers/counting-ordered-react-components.jpg"
+---
+
+For one of my work projects, I needed to build a form application with a dynamic number of boxes on the screen. Each of these boxes was supposed to display two numbers - the first number would tell the order of the box and the second number would show the total number of boxes displayed on-screen.
+
+You can see the demo of the project here:
+
+<iframe src="https://codesandbox.io/embed/react-numbered-boxes-01ngl?fontsize=14&hidenavigation=1&theme=dark&view=preview"
+     style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+     title="react-numbered-boxes"
+     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+     sandbox="allow-autoplay allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
+
+## Using CSS counters to show the order number
+
+To show the order in which the components are displayed on-screen can be done quite easily with CSS counters. You don’t even need any React code to do this.
+
+Firstly, I have created a component called BoxArea. This is a general component wrapping all the boxes we render:
+
+```jsx
+const BoxArea = ({ children }) => <div className="box-area">{children}</div>;
+```
+
+Important here is the CSS style that we apply to this component:
+
+```css
+.box-area {
+    counter-reset: card-order;
+}
+```
+
+The `counter-reset` CSS property creates a new counter called `card-order`. This counter will increment by 1 for each element with `counter-increment: card-order;` CSS property within the BoxArea component.
+
+Now it’s time to create the React component for the box. I have created a simple box component that looks like this:
+
+```jsx
+const Box = ({ title, total }) => (
+    <div className="box focusable-box" tabIndex={-1}>
+        <div className="header">
+            <div className="title">{title}</div>
+            <div className="flex">
+                <div className="order-number" />
+                <div>&nbsp;/&nbsp;</div>
+                <div>{total}</div>
+            </div>
+        </div>
+        <div className="content">
+            <label htmlFor="fname">First name:</label>
+            <input type="text" id="fname" name="fname" />
+            <div className="space" />
+            <label htmlFor="lname">Last name:</label>
+            <input type="text" id="lname" name="lname" />
+        </div>
+    </div>
+);
+```
+
+For now, let’s focus closely on the div element with `className=”order-number”`. Its CSS style looks like this:
+
+```css
+.order-number {
+    counter-increment: card-order;
+}
+
+.order-number:before {
+    content: counter(card-order);
+}
+```
+
+The `counter-increment: card-order` property increases the `card-order` counter by one each time an element with `order-number` CSS class appears on the screen. That’s why it’s important to apply this property to the element within the box.
+
+The `content` property is responsible for displaying the order number of the box. It’s important to use `::before` selector here as the content property can only be used on `::before` or `::after` pseudo-elements.
+
+## Creating a custom React hook to count the total number of boxes
+
+In the example above, I’m iterating over an array of objects to determine which box should be displayed:
+
+```js
+const initialState = [
+    {
+        id: 1,
+        show: true,
+        title: "Personal details",
+    },
+    {
+        id: 2,
+        show: false,
+        title: "Product details",
+    },
+    ...
+];
+```
+
+In this case, I can get the number of total boxes quite easily by filtering this list. Something like this would work, right?
+
+```js
+const total = boxDisplayState.filter((boxState) => boxState.show).length;
+```
+
+But imagine a situation where, for example, you have a bunch of data in your Redux store and you derive the conditions for showing the boxes from this data. In such a case, you don’t have a list you can iterate over, but you probably have a selector for each box, which tells the application whether to show the particular box or not. For example:
+
+```js
+const mapStateToProps = (state) => ({
+    showAddressBox: getShowAddressBox(state),
+});
+```
+
+...
+
+```jsx
+{showAddressBox && <Box title=”Address” total={total} />}
+```
+
+To handle a problem like this, you need a more universal solution to count the total number of boxes on-screen. I decided to go with a custom React hook that looks like this:
+
+```js
+import { useState, useEffect } from "react";
+
+const useCountTotal = (selector, ...dependencies) => {
+    const [total, setTotal] = useState(0);
+
+    useEffect(() => {
+        setTotal(document.querySelectorAll(selector).length);
+    }, [selector, ...dependencies]);
+
+    return total;
+};
+
+export default useCountTotal;
+```
+
+This hook takes a CSS selector as a first argument and the rest of the arguments are dependencies for useEffect hook (they tell useEffect to run the effect when one of the dependencies changes). The hook then returns the total number of elements with the provided CSS selector. Its usage is very straightforward:
+
+```js
+const total = useCountTotal(".focusable-box", boxDisplayState);
+```
