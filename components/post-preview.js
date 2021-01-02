@@ -4,7 +4,7 @@ import Link from "next/link";
 const PostPreview = ({ title, date, excerpt, slug }) => (
     <div>
         <h3 className="text-4xl font-bold tracking-tighter leading-tight mb-3">
-            <Link as={`/posts/${slug}`} href="/posts/[slug]">
+            <Link as={`/blog/${slug}`} href="/blog/[slug]">
                 <a>{title}</a>
             </Link>
         </h3>

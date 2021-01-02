@@ -16,10 +16,10 @@ Lately, I’ve been getting into Next.js and it’s been an awesome experience s
 
 **Server-side rendering (SSR)**: when using SSR, the page is rendered on the server at the time of the request (when the user visits the page) and then served to the client. This is very useful when you need to fetch some data from the database and generate content around this data:
 
--   User visits the page
--   The server queries the DB to get the data needed to generate the page
--   When the data is available, the server generates the page
--   Once the page is generated, it is sent to the client (web browser)
+1.  User visits the page
+2.  The server queries the DB to get the data needed to generate the page
+3.  When the data is available, the server generates the page
+4.  Once the page is generated, it is sent to the client (web browser)
 
 Static rendering has the advantage of better performance since you skip the step of rendering the page on the server. On the other hand, if you need to work with live data, you will either need to use server-side rendering or some kind of hybrid approach (serve part of the page statically and fetch the data during runtime). We are going to talk about the hybrid solution later in this article.
 
@@ -28,7 +28,9 @@ Static rendering has the advantage of better performance since you skip the step
 We are going to build a simple tech news website that aggregates articles from various news sources. There are going to be following pages:
 
 -   **Top headlines**: this is going to be the index page of our app and will display top headlines across all news sources. Since the top news can change rapidly, we are going to render this page on the server (SSR) with each client request to make sure that it’s always up to date.
+
 -   **Sources**: sources page will show a list of all news sources. It’s going to be statically rendered since the news sources are rarely changed.
+
 -   **Source detail**: for each news source, there is going to be a source detail page that will show its top headlines. We are going to render the detail page statically, but we will also utilize incremental static regeneration to update the headlines frequently.
 
 ### GitHub repository
@@ -94,7 +96,9 @@ export async function getStaticProps() {
 Static content generation has many advantages:
 
 -   **Performance and caching** - this page will turn into a completely static HTML file. It means that whenever a user accesses this page, it is ready to be served straight away without running any additional operation (script, API call, etc.) on the server. This naturally leads to better performance. Also, static files can be cached on the CDN - for example if you use Vercel, the caching of static files is [enabled by default](https://vercel.com/docs/edge-network/caching).
+
 -   **No backend dependency** - since the pages are pre-rendered during build time, there is no need to query the backend (API, database, etc.) on run time. So even if your backend is down, the static pages will still be available to the users.
+
 -   **Improved security** - static files are much less prone to security issues. Since there is no database to be queried during runtime, hackers cannot perform SQL injection attacks or abuse server side security holes.
 
 One very obvious disadvantage of this approach is that when we want to add another news source, we would need to rebuild the app. This example is a bit contrived and we probably wouldn’t want to do this in a real app, but static generation is still very useful for pages that don’t really change much (e.g. blog posts, about us pages, contact pages and so on).

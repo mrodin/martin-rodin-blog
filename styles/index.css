@@ -9,6 +9,11 @@
         text-underline-offset: 0.04em;
     }
 
+    ol {
+        list-style: decimal;
+        margin-left: 20px;
+    }
+
     ul {
         margin-left: 30px;
     }
