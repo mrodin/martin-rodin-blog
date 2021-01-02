@@ -1,5 +1,10 @@
 module.exports = {
-    purge: ["./components/**/*.js", "./pages/**/*.js"],
+    purge: [
+        "./components/**/*.js",
+        "./components/**/*.tsx",
+        "./pages/**/*.js",
+        "./pages/**/*.tsx",
+    ],
     theme: {
         fontFamily: {
             article: [
