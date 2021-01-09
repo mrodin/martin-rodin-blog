@@ -7,7 +7,7 @@ export default function Footer() {
             <Container>
                 <div className="py-4 flex flex-col lg:flex-row justify-between items-center">
                     <div className="text-xs lg:text-sm tracking-tighter leading-tight text-center lg:text-right mb-3 lg:mb-0">
-                        Martin Rodin | 2020
+                        Martin Rodin | 2021
                     </div>
                     <div className="text-xs lg:text-sm tracking-tighter leading-tight text-center lg:text-right mb-0 lg:mb-0">
                         Statically Generated with Next.js.
