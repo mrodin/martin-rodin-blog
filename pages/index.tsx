@@ -8,34 +8,34 @@ import Head from "next/head";
 import Post from "../types/post";
 
 type Props = {
-    allPosts: Post[];
+  allPosts: Post[];
 };
 
 const Index = ({ allPosts }: Props) => (
-    <Layout>
-        <Head>
-            <title>Martin Rodin - Front-end Web Developer</title>
-        </Head>
-        <Container>
-            <Intro />
-            <MoreStories posts={allPosts} />
-        </Container>
-    </Layout>
+  <Layout>
+    <Head>
+      <title>Martin Rodin - Front-end Web Developer</title>
+    </Head>
+    <Container>
+      <Intro />
+      <MoreStories posts={allPosts} />
+    </Container>
+  </Layout>
 );
 
 export async function getStaticProps() {
-    const allPosts = getAllPosts([
-        "title",
-        "date",
-        "slug",
-        "author",
-        "coverImage",
-        "excerpt",
-    ]);
+  const allPosts = getAllPosts([
+    "title",
+    "date",
+    "slug",
+    "author",
+    "coverImage",
+    "excerpt",
+  ]);
 
-    return {
-        props: { allPosts },
-    };
+  return {
+    props: { allPosts },
+  };
 }
 
 export default Index;

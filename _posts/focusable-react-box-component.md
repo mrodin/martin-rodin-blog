@@ -4,10 +4,10 @@ excerpt: "Read on if you want to find out how to apply a style to a component th
 coverImage: "/assets/blog/covers/react-focusable-box-component.jpg"
 date: "2020-06-13T05:35:07.322Z"
 author:
-    name: Martin Rodin
-    picture: "/assets/blog/authors/martin.jpg"
+  name: Martin Rodin
+  picture: "/assets/blog/authors/martin.jpg"
 ogImage:
-    url: "/assets/blog/covers/react-focusable-box-component.jpg"
+  url: "/assets/blog/covers/react-focusable-box-component.jpg"
 ---
 
 Recently I was working on a form app containing many boxes with various input fields. One of the requirements was to make each box focusable on mouse hover and on click. I was a bit afraid of this as managing focus in React can be painful, but fortunately, I found an easy solution using CSS.
@@ -26,24 +26,24 @@ Suppose we have a box component that looks like this:
 
 ```jsx
 const Card = () => (
-    <div className="card">
-        <div className="header">Focusable box</div>
-        <div className="content">
-            <label for="fname">First name:</label>
-            <input type="text" id="fname" name="fname" />
-            <div className="space" />
-            <label for="lname">Last name:</label>
-            <input type="text" id="lname" name="lname" />
-        </div>
+  <div className="card">
+    <div className="header">Focusable box</div>
+    <div className="content">
+      <label for="fname">First name:</label>
+      <input type="text" id="fname" name="fname" />
+      <div className="space" />
+      <label for="lname">Last name:</label>
+      <input type="text" id="lname" name="lname" />
     </div>
+  </div>
 );
 ```
 
 There are several things we want to achieve:
 
--   give the Card component some unique style when the user hovers over it
--   apply the same style also when the user is typing in the input field inside the Card component (i.e. the input field has a focus)
--   optionally - we want to make the Card component itself focusable so that the styles are applied also when the user clicks on the Card (outside the input field)
+- give the Card component some unique style when the user hovers over it
+- apply the same style also when the user is typing in the input field inside the Card component (i.e. the input field has a focus)
+- optionally - we want to make the Card component itself focusable so that the styles are applied also when the user clicks on the Card (outside the input field)
 
 ## Applying styles on component hover
 
@@ -51,11 +51,11 @@ This is the easiest part as we can use the `:hover` pseudo-class:
 
 ```css
 .card:hover {
-    box-shadow: 0 1px 9px 0 #cccccc;
+  box-shadow: 0 1px 9px 0 #cccccc;
 
-    .header {
-        background-color: #32e0c4;
-    }
+  .header {
+    background-color: #32e0c4;
+  }
 }
 ```
 
@@ -66,11 +66,11 @@ To give the Card the same style when one of its input fields have focus, we can 
 ```css
 .card:hover,
 .card:focus-within {
-    box-shadow: 0 1px 9px 0 #cccccc;
+  box-shadow: 0 1px 9px 0 #cccccc;
 
-    .header {
-        background-color: #32e0c4;
-    }
+  .header {
+    background-color: #32e0c4;
+  }
 }
 ```
 

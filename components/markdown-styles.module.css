@@ -1,26 +1,26 @@
 .markdown {
-    @apply text-xl leading-relaxed;
+  @apply text-xl leading-relaxed;
 }
 
 .markdown p,
 .markdown ul,
 .markdown ol,
 .markdown blockquote {
-    @apply font-article mb-6;
+  @apply font-article mb-6;
 }
 
 .markdown h2 {
-    @apply font-medium text-3xl mt-12 mb-4 leading-tight;
+  @apply font-medium text-3xl mt-12 mb-4 leading-tight;
 }
 
 .markdown h3 {
-    @apply font-medium text-2xl mt-12 mb-4 leading-tight;
+  @apply font-medium text-2xl mt-12 mb-4 leading-tight;
 }
 
 .markdown code {
-    @apply text-base leading-relaxed mb-6;
+  @apply text-base leading-relaxed mb-6;
 }
 
 .markdown iframe {
-    @apply mb-6;
+  @apply mb-6;
 }

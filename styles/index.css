@@ -2,40 +2,40 @@
 
 /* Write your own custom base styles here */
 @layer base {
-    a {
-        text-decoration: underline;
-        text-decoration-color: #f372b6;
-        text-decoration-thickness: 0.125em;
-        text-underline-offset: 0.04em;
-    }
+  a {
+    text-decoration: underline;
+    text-decoration-color: #f372b6;
+    text-decoration-thickness: 0.125em;
+    text-underline-offset: 0.04em;
+  }
 
-    ol {
-        list-style: decimal;
-        margin-left: 20px;
-    }
+  ol {
+    list-style: decimal;
+    margin-left: 20px;
+  }
 
-    ul {
-        margin-left: 30px;
-    }
+  ul {
+    margin-left: 30px;
+  }
 
-    ul li {
-        list-style: none;
-        position: relative;
-    }
+  ul li {
+    list-style: none;
+    position: relative;
+  }
 
-    ul li::before {
-        content: "\1F449";
-        position: absolute;
-        left: -30px;
-    }
+  ul li::before {
+    content: "\1F449";
+    position: absolute;
+    left: -30px;
+  }
 
-    code {
-        @apply text-pink-500;
-    }
+  code {
+    @apply text-pink-500;
+  }
 
-    pre {
-        overflow: hidden;
-    }
+  pre {
+    overflow: hidden;
+  }
 }
 
 /* Start purging... */
@@ -50,7 +50,7 @@
 
 /* Your own custom utilities */
 @layer utilities {
-    .gradient-title {
-        @apply bg-gradient-to-r from-pink-400 via-blue-400 to-green-400 bg-clip-text text-transparent;
-    }
+  .gradient-title {
+    @apply bg-gradient-to-r from-pink-400 via-blue-400 to-green-400 bg-clip-text text-transparent;
+  }
 }

@@ -4,10 +4,10 @@ excerpt: "Have you ever needed to count how many instances of a component is ren
 coverImage: "/assets/blog/covers/counting-ordered-react-components.jpg"
 date: "2020-10-14T05:35:07.322Z"
 author:
-    name: Martin Rodin
-    picture: "/assets/blog/authors/martin.jpg"
+  name: Martin Rodin
+  picture: "/assets/blog/authors/martin.jpg"
 ogImage:
-    url: "/assets/blog/covers/counting-ordered-react-components.jpg"
+  url: "/assets/blog/covers/counting-ordered-react-components.jpg"
 ---
 
 For one of my work projects, I needed to build a form application with a dynamic number of boxes on the screen. Each of these boxes was supposed to display two numbers - the first number would tell the order of the box and the second number would show the total number of boxes displayed on-screen.
@@ -35,7 +35,7 @@ Important here is the CSS style that we apply to this component:
 
 ```css
 .box-area {
-    counter-reset: card-order;
+  counter-reset: card-order;
 }
 ```
 
@@ -45,23 +45,23 @@ Now it’s time to create the React component for the box. I have created a simp
 
 ```jsx
 const Box = ({ title, total }) => (
-    <div className="box focusable-box" tabIndex={-1}>
-        <div className="header">
-            <div className="title">{title}</div>
-            <div className="flex">
-                <div className="order-number" />
-                <div>&nbsp;/&nbsp;</div>
-                <div>{total}</div>
-            </div>
-        </div>
-        <div className="content">
-            <label htmlFor="fname">First name:</label>
-            <input type="text" id="fname" name="fname" />
-            <div className="space" />
-            <label htmlFor="lname">Last name:</label>
-            <input type="text" id="lname" name="lname" />
-        </div>
+  <div className="box focusable-box" tabIndex={-1}>
+    <div className="header">
+      <div className="title">{title}</div>
+      <div className="flex">
+        <div className="order-number" />
+        <div>&nbsp;/&nbsp;</div>
+        <div>{total}</div>
+      </div>
     </div>
+    <div className="content">
+      <label htmlFor="fname">First name:</label>
+      <input type="text" id="fname" name="fname" />
+      <div className="space" />
+      <label htmlFor="lname">Last name:</label>
+      <input type="text" id="lname" name="lname" />
+    </div>
+  </div>
 );
 ```
 
@@ -69,11 +69,11 @@ For now, let’s focus closely on the div element with `className=”order-numbe
 
 ```css
 .order-number {
-    counter-increment: card-order;
+  counter-increment: card-order;
 }
 
 .order-number:before {
-    content: counter(card-order);
+  content: counter(card-order);
 }
 ```
 
@@ -111,7 +111,7 @@ But imagine a situation where, for example, you have a bunch of data in your Red
 
 ```js
 const mapStateToProps = (state) => ({
-    showAddressBox: getShowAddressBox(state),
+  showAddressBox: getShowAddressBox(state),
 });
 ```
 
@@ -127,13 +127,13 @@ To handle a problem like this, you need a more universal solution to count the t
 import { useState, useEffect } from "react";
 
 const useCountTotal = (selector, ...dependencies) => {
-    const [total, setTotal] = useState(0);
+  const [total, setTotal] = useState(0);
 
-    useEffect(() => {
-        setTotal(document.querySelectorAll(selector).length);
-    }, [selector, ...dependencies]);
+  useEffect(() => {
+    setTotal(document.querySelectorAll(selector).length);
+  }, [selector, ...dependencies]);
 
-    return total;
+  return total;
 };
 
 export default useCountTotal;

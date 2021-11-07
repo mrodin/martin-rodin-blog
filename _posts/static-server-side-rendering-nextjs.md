@@ -4,10 +4,10 @@ excerpt: "Server side rendering can be a complicated matter. Let me show you how
 coverImage: "/assets/blog/covers/static-server-side-rendering-nextjs.jpg"
 date: "2021-01-01"
 author:
-    name: Martin Rodin
-    picture: "/assets/blog/authors/martin.jpg"
+  name: Martin Rodin
+  picture: "/assets/blog/authors/martin.jpg"
 ogImage:
-    url: "/assets/blog/covers/static-server-side-rendering-nextjs.jpg"
+  url: "/assets/blog/covers/static-server-side-rendering-nextjs.jpg"
 ---
 
 Lately, I’ve been getting into Next.js and it’s been an awesome experience so far. Next.js is a React framework that allows you to seamlessly combine static and server-side rendering in your project. What is the difference?
@@ -27,11 +27,11 @@ Static rendering has the advantage of better performance since you skip the step
 
 We are going to build a simple tech news website that aggregates articles from various news sources. There are going to be following pages:
 
--   **Top headlines**: this is going to be the index page of our app and will display top headlines across all news sources. Since the top news can change rapidly, we are going to render this page on the server (SSR) with each client request to make sure that it’s always up to date.
+- **Top headlines**: this is going to be the index page of our app and will display top headlines across all news sources. Since the top news can change rapidly, we are going to render this page on the server (SSR) with each client request to make sure that it’s always up to date.
 
--   **Sources**: sources page will show a list of all news sources. It’s going to be statically rendered since the news sources are rarely changed.
+- **Sources**: sources page will show a list of all news sources. It’s going to be statically rendered since the news sources are rarely changed.
 
--   **Source detail**: for each news source, there is going to be a source detail page that will show its top headlines. We are going to render the detail page statically, but we will also utilize incremental static regeneration to update the headlines frequently.
+- **Source detail**: for each news source, there is going to be a source detail page that will show its top headlines. We are going to render the detail page statically, but we will also utilize incremental static regeneration to update the headlines frequently.
 
 ### GitHub repository
 
@@ -51,11 +51,11 @@ To do so, we need to export the `getServerSideProps` function from the respectiv
 // EVERY request. Next.js will inject the props object
 // into the page component.
 export async function getServerSideProps() {
-    return {
-        props: {
-            topHeadlines: await getTopHeadlines(),
-        },
-    };
+  return {
+    props: {
+      topHeadlines: await getTopHeadlines(),
+    },
+  };
 }
 ```
 
@@ -63,15 +63,15 @@ The `getTopHeadlines` function is a simple wrapper function around JS fetch. It 
 
 ```js
 export const getTopHeadlines = async () => {
-    const res = await fetch(
-        `https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=${API_KEY}`
-    );
-    if (res.ok) {
-        const topHeadlinesJson = await res.json();
-        return topHeadlinesJson.articles;
-    } else {
-        return [];
-    }
+  const res = await fetch(
+    `https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=${API_KEY}`
+  );
+  if (res.ok) {
+    const topHeadlinesJson = await res.json();
+    return topHeadlinesJson.articles;
+  } else {
+    return [];
+  }
 };
 ```
 
@@ -85,21 +85,21 @@ Since the news sources rarely change, we are going to make this page completely 
 // getServerSideProps, Next.js will provide the
 // props object to the page component.
 export async function getStaticProps() {
-    return {
-        props: {
-            sources: await getSources(),
-        },
-    };
+  return {
+    props: {
+      sources: await getSources(),
+    },
+  };
 }
 ```
 
 Static content generation has many advantages:
 
--   **Performance and caching** - this page will turn into a completely static HTML file. It means that whenever a user accesses this page, it is ready to be served straight away without running any additional operation (script, API call, etc.) on the server. This naturally leads to better performance. Also, static files can be cached on the CDN - for example if you use Vercel, the caching of static files is [enabled by default](https://vercel.com/docs/edge-network/caching).
+- **Performance and caching** - this page will turn into a completely static HTML file. It means that whenever a user accesses this page, it is ready to be served straight away without running any additional operation (script, API call, etc.) on the server. This naturally leads to better performance. Also, static files can be cached on the CDN - for example if you use Vercel, the caching of static files is [enabled by default](https://vercel.com/docs/edge-network/caching).
 
--   **No backend dependency** - since the pages are pre-rendered during build time, there is no need to query the backend (API, database, etc.) on run time. So even if your backend is down, the static pages will still be available to the users.
+- **No backend dependency** - since the pages are pre-rendered during build time, there is no need to query the backend (API, database, etc.) on run time. So even if your backend is down, the static pages will still be available to the users.
 
--   **Improved security** - static files are much less prone to security issues. Since there is no database to be queried during runtime, hackers cannot perform SQL injection attacks or abuse server side security holes.
+- **Improved security** - static files are much less prone to security issues. Since there is no database to be queried during runtime, hackers cannot perform SQL injection attacks or abuse server side security holes.
 
 One very obvious disadvantage of this approach is that when we want to add another news source, we would need to rebuild the app. This example is a bit contrived and we probably wouldn’t want to do this in a real app, but static generation is still very useful for pages that don’t really change much (e.g. blog posts, about us pages, contact pages and so on).
 
@@ -119,12 +119,12 @@ Now when we want to pre-render a dynamic route page using `getStaticProps`, we n
 
 ```js
 export async function getStaticPaths() {
-    const sources = await getSources();
-    const paths = sources.map((source) => ({
-        params: { id: source.id },
-    }));
+  const sources = await getSources();
+  const paths = sources.map((source) => ({
+    params: { id: source.id },
+  }));
 
-    return { paths, fallback: false };
+  return { paths, fallback: false };
 }
 ```
 
@@ -145,11 +145,11 @@ Now that we have our `getStaticPaths` function, we will also need to export a `g
 
 ```js
 export async function getStaticProps({ params }) {
-    return {
-        props: {
-            headlines: await getSourceHeadlines(params.id),
-        },
-    };
+  return {
+    props: {
+      headlines: await getSourceHeadlines(params.id),
+    },
+  };
 }
 ```
 
@@ -163,15 +163,15 @@ Incremental static regeneration is a feature of Next.js that allows you to “re
 
 ```js
 export async function getStaticProps({ params }) {
-    return {
-        props: {
-            headlines: await getSourceHeadlines(params.id),
-        },
-        // With revalidate: 1, Next.js will regenerate our source
-        // detail page every time a user comes to visit it, but at
-        // most every 1 second.
-        revalidate: 1,
-    };
+  return {
+    props: {
+      headlines: await getSourceHeadlines(params.id),
+    },
+    // With revalidate: 1, Next.js will regenerate our source
+    // detail page every time a user comes to visit it, but at
+    // most every 1 second.
+    revalidate: 1,
+  };
 }
 ```
 

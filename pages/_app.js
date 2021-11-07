@@ -6,17 +6,17 @@ import "../styles/github-gist.css";
 import * as gtag from "../lib/gtag";
 
 export default function MyApp({ Component, pageProps }) {
-    const router = useRouter();
+  const router = useRouter();
 
-    useEffect(() => {
-        const handleRouteChange = (url) => {
-            gtag.pageview(url);
-        };
-        router.events.on("routeChangeComplete", handleRouteChange);
-        return () => {
-            router.events.off("routeChangeComplete", handleRouteChange);
-        };
-    }, [router.events]);
+  useEffect(() => {
+    const handleRouteChange = (url) => {
+      gtag.pageview(url);
+    };
+    router.events.on("routeChangeComplete", handleRouteChange);
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [router.events]);
 
-    return <Component {...pageProps} />;
+  return <Component {...pageProps} />;
 }
