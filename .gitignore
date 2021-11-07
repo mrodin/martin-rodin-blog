@@ -1,4 +1,5 @@
 .env
 .now
 .next
+.idea
 node_modules/
