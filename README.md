@@ -10,14 +10,6 @@ To create the blog posts we use [`remark`](https://github.com/remarkjs/remark) a
 
 [https://next-blog-starter.now.sh/](https://next-blog-starter.now.sh/)
 
-### Related examples
-
-- [DatoCMS](/examples/cms-datocms)
-- [Sanity](/examples/cms-sanity)
-- [TakeShape](/examples/cms-takeshape)
-- [Prismic](/examples/cms-prismic)
-- [Contentful](/examples/cms-contentful)
-
 ## How to use
 
 ### Using `create-next-app`
