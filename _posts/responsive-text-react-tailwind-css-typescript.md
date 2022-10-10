@@ -1,0 +1,85 @@
+---
+title: "Responsive text with React, Tailwind CSS and TypeScript"
+excerpt: "Responsive font size is an important part in making your web look good on every device. Here's how I do it with React, Tailwind CSS and TypeScript."
+coverImage: "/assets/blog/covers/responsive-text-react-tailwind-css-typescript.jpg"
+date: "2022-10-07"
+author:
+    name: Martin Rodin
+    picture: "/assets/blog/authors/martin.jpg"
+ogImage:
+    url: "/assets/blog/covers/responsive-text-react-tailwind-css-typescript.jpg"
+---
+
+In most of my projects I find myself creating a Text component that needs to have an ability to scale font size automatically based on the current viewport. Recently I have been working with Tailwind CSS, which makes this quite easy.
+
+Firstly, I always want to define a limited group of sizes that I’m going to be using in my app. I do this to avoid inconsistencies in my design and one-off values. I define my font sizes in TypeScript enum:
+
+```ts
+enum FontSize {
+  "xs",
+  "sm",
+  "base",
+  "lg",
+  "xl",
+  "4xl",
+  "6xl",
+}
+```
+
+Now when I have the enum defined, I’m going to assign a Tailwind CSS class to each value. Since we want the text to be responsive, I’m also going to use Tailwinds responsive breakpoint prefixes:
+
+```ts
+enum FontSize {
+  'xs' = "text-xs",
+  'sm' = "text-sm",
+  'base' = "text-base",
+  'lg' = "text-base md:text-lg",
+  'xl' = "text-lg md:text-xl",
+  'xl4' = "text-xl md:text-4xl",
+  'xl6' = "text-4xl md:text-6xl",
+}
+```
+
+I design my apps in mobile-first fashion (which is also a default for Tailwind CSS). So, for example, if we take a look at FontSize ‘lg’ value, it means that on small screens (minimum width 640px according to default Tailwind breakpoints), the text is going to get text-base class. For medium screens (min width 768px) and larger, the text will get text-lg class name and larger font size associated with it.
+
+You can define as many breakpoints as you need here. If you wanted to make the font even bigger on wide screens, you would simply add another breakpoint like this:
+
+```
+'lg' = "text-base md:text-lg xl:text-xl"
+```
+Here is an example of what my typical Text component looks like. As you can see, I’m using TypeScript enums for all my props (size, color, etc.). This makes it very easy to keep a consistent design across my app. I also give sensible defaults to my component, so I don’t have to specify size, color and other props every time I use the component for a common text paragraph.
+
+```tsx
+import { FC } from "react";
+import {
+  FontSize,
+  FontWeight,
+  TextColor,
+} from "core/theme";
+
+type TextProps = {
+  color?: TextColor;
+  size?: FontSize;
+  weight?: FontWeight;
+};
+
+const Text: FC<TextProps> = ({
+  children,
+  color = TextColor.slate800,
+  size = FontSize.base,
+  weight = FontWeight.normal,
+}) => (
+  <p className={`${size} ${weight} ${color}`}>
+     {children}
+  </p>
+);
+```
+
+And lastly, this is how you use the Text component in your React app:
+
+```tsx
+import { Text } from "components";
+import { FontSize } from "core/theme";
+
+<Text size={FontSize.xl}>Some text</Text>
+```
