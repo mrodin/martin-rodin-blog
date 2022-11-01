@@ -7,14 +7,7 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      article: [
-        "Lora",
-        "Georgia",
-        "Cambria",
-        "Times New Roman",
-        "Times",
-        "serif",
-      ],
+      article: ["Georgia", "Cambria", "Times New Roman", "Times", "serif"],
     },
     extend: {
       colors: {
