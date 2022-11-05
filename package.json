@@ -9,15 +9,16 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@next/font": "^13.0.0",
     "classnames": "2.3.2",
     "date-fns": "2.29.3",
+    "esbuild": "0.14.54",
     "gray-matter": "4.0.3",
+    "mdx-bundler": "9.0.1",
     "next": "13.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "remark": "14.0.2",
-    "remark-html": "15.0.1"
+    "rehype-pretty-code": "0.4.0",
+    "shiki": "0.11.1"
   },
   "devDependencies": {
     "@types/node": "18.11.8",

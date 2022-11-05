@@ -24,14 +24,7 @@ const Index = ({ allPosts }: Props) => (
 );
 
 export async function getStaticProps() {
-  const allPosts = getAllPosts([
-    "title",
-    "date",
-    "slug",
-    "author",
-    "coverImage",
-    "excerpt",
-  ]);
+  const allPosts = await getAllPosts();
 
   return {
     props: { allPosts },
