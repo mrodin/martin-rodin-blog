@@ -2,7 +2,7 @@ import Container from "../components/Container";
 import MoreStories from "../components/more-stories";
 import Intro from "../components/Intro";
 import Layout from "../components/Layout";
-import { getAllPosts } from "../lib/api";
+import { getSortedPosts } from "../lib/api";
 import Head from "next/head";
 
 import Post from "../types/post";
@@ -24,10 +24,10 @@ const Index = ({ allPosts }: Props) => (
 );
 
 export async function getStaticProps() {
-  const allPosts = await getAllPosts();
+  const posts = await getSortedPosts();
 
   return {
-    props: { allPosts },
+    props: { allPosts: posts },
   };
 }
 

@@ -3,20 +3,21 @@ import ErrorPage from "next/error";
 import Container from "../../components/Container";
 import Header from "../../components/header";
 import Layout from "../../components/Layout";
-import { getPostBySlug } from "../../lib/api";
+import { getPostBySlug, getSortedPosts } from "../../lib/api";
 import PostTitle from "../../components/post-title";
 import { getMDXComponent } from "mdx-bundler/client";
 import { useMemo } from "react";
+import Head from "next/head";
 
-export default function Post({ code, frontmatter }) {
+export default function Post({ slug, frontmatter, code }) {
   const Component = useMemo(() => getMDXComponent(code), [code]);
 
-  // const router = useRouter();
-  // if (!router.isFallback && !post?.slug) {
-  //   return <ErrorPage statusCode={404} />;
-  // }
+  const router = useRouter();
+  if (!router.isFallback && !slug) {
+    return <ErrorPage statusCode={404} />;
+  }
 
-  // const title = `${post.title} | Martin Rodin - Front-end Web Developer`;
+  const title = `${frontmatter.title} | Martin Rodin - Front-end Web Developer`;
 
   return (
     <Layout>
@@ -26,10 +27,10 @@ export default function Post({ code, frontmatter }) {
           <article className="mb-32">
             <PostTitle>{frontmatter.title}</PostTitle>
             <Component />
-            {/*<Head>*/}
-            {/*  <title>{title}</title>*/}
-            {/*  <meta property="og:image" content={post.ogImage.url} />*/}
-            {/*</Head>*/}
+            <Head>
+              <title>{title}</title>
+              <meta property="og:image" content={frontmatter.ogImage.url} />
+            </Head>
             {/*<PostHeader*/}
             {/*  title={post.title}*/}
             {/*  coverImage={post.coverImage}*/}
@@ -54,12 +55,14 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-  // const posts = getAllPosts(["slug"]);
+  const posts = await getSortedPosts();
 
   return {
-    paths: [
-      { params: { slug: "responsive-text-react-tailwind-css-typescript" } },
-    ],
+    paths: posts.map((post) => ({
+      params: {
+        slug: post.slug,
+      },
+    })),
     fallback: false,
   };
 }

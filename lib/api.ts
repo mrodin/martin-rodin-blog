@@ -5,6 +5,27 @@ import rehypePrettyCode from "rehype-pretty-code";
 
 const postsDirectory = path.join(process.cwd(), "posts");
 
+export function getPostSlugs() {
+  return fs
+    .readdirSync(postsDirectory)
+    .map((slug) => slug.replace(/\.mdx$/, ""));
+}
+
+export async function getSortedPosts() {
+  const slugs = getPostSlugs();
+  const postPromises = slugs.map((slug) => getPostBySlug(slug));
+  const posts = await Promise.all(postPromises);
+
+  return posts
+    .map((post) => ({
+      slug: post.slug,
+      frontmatter: post.frontmatter,
+    }))
+    .sort((post1, post2) =>
+      post1.frontmatter.date > post2.frontmatter.date ? -1 : 1
+    );
+}
+
 const rehypePrettyCodeOptions = {
   // use a prepackaged theme
   theme: "one-dark-pro",
@@ -35,19 +56,4 @@ export async function getPostBySlug(slug: string) {
     frontmatter,
     code,
   };
-}
-
-export function getPostSlugs() {
-  return fs.readdirSync(postsDirectory);
-}
-
-export async function getAllPosts() {
-  const slugs = getPostSlugs().map((slug) => slug.replace(/\.mdx$/, ""));
-
-  const posts = slugs.map((slug) => getPostBySlug(slug));
-  const promises = await Promise.all(posts);
-
-  // sort posts by date in descending order
-  // .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
-  return promises;
 }
