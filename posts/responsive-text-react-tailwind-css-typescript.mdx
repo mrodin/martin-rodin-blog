@@ -44,7 +44,7 @@ I design my apps in mobile-first fashion (which is also a default for Tailwind C
 
 You can define as many breakpoints as you need here. If you wanted to make the font even bigger on wide screens, you would simply add another breakpoint like this:
 
-```
+```tsx
 'lg' = "text-base md:text-lg xl:text-xl"
 ```
 Here is an example of what my typical Text component looks like. As you can see, I’m using TypeScript enums for all my props (size, color, etc.). This makes it very easy to keep a consistent design across my app. I also give sensible defaults to my component, so I don’t have to specify size, color and other props every time I use the component for a common text paragraph.

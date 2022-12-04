@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { bundleMDX } from "mdx-bundler";
+import remarkEmbedder from "@remark-embedder/core";
 import rehypePrettyCode from "rehype-pretty-code";
 
 const postsDirectory = path.join(process.cwd(), "posts");
@@ -26,8 +27,24 @@ export async function getSortedPosts() {
     );
 }
 
+const CodeSandboxTransformer = {
+  name: "CodeSandbox",
+  shouldTransform(url) {
+    const { host, pathname } = new URL(url);
+
+    return (
+      ["codesandbox.io", "www.codesandbox.io"].includes(host) &&
+      pathname.includes("/s/")
+    );
+  },
+  getHTML(url) {
+    const iframeUrl = url.replace("/s/", "/embed/");
+
+    return `<iframe src="${iframeUrl}" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking" sandbox="allow-autoplay allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>`;
+  },
+};
+
 const rehypePrettyCodeOptions = {
-  // use a prepackaged theme
   theme: "one-dark-pro",
 };
 
@@ -41,7 +58,10 @@ export async function getPostBySlug(slug: string) {
       // this is the recommended way to add custom remark/rehype plugins:
       // The syntax might look weird, but it protects you in case we add/remove
       // plugins in the future.
-      options.remarkPlugins = [...(options.remarkPlugins ?? [])];
+      options.remarkPlugins = [
+        ...(options.remarkPlugins ?? []),
+        [remarkEmbedder, { transformers: [CodeSandboxTransformer] }],
+      ];
       options.rehypePlugins = [
         ...(options.rehypePlugins ?? []),
         [rehypePrettyCode, rehypePrettyCodeOptions],

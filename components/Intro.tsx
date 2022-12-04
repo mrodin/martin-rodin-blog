@@ -1,10 +1,14 @@
 import { FC } from "react";
+import Link from "next/link";
 
 const Intro: FC = () => (
-  <section className="flex mt-16 mb-16 md:mb-12">
-    <h1 className="text-6xl md:text-6xl font-bold tracking-tighter leading-tight md:pr-8 gradient-title">
+  <section className="mt-16 mb-16 flex md:mb-12">
+    <Link
+      href="/"
+      className="gradient-title text-6xl font-bold leading-tight tracking-tighter no-underline md:pr-8 md:text-6xl"
+    >
       Martin Rodin
-    </h1>
+    </Link>
   </section>
 );
 
