@@ -6,7 +6,7 @@
   ul,
   ol,
   blockquote {
-    @apply font-article mb-6;
+    @apply font-sans mb-6;
   }
 
 

@@ -1,3 +1,6 @@
+const { fontFamily } = require("tailwindcss/defaultTheme");
+
+/** @type {import('tailwindcss').Config} \*/
 module.exports = {
   purge: [
     "./components/**/*.js",
@@ -7,7 +10,7 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      article: ["Georgia", "Cambria", "Times New Roman", "Times", "serif"],
+      sans: ["var(--font-inter)", ...fontFamily.sans],
     },
     extend: {
       colors: {
