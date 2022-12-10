@@ -3,15 +3,15 @@ import Link from "next/link";
 
 const PostPreview = ({ title, date, excerpt, slug }) => (
   <div>
-    <h3 className="text-4xl font-bold tracking-tighter leading-tight mb-3">
+    <h3 className="mb-3 text-4xl font-bold leading-tight tracking-tighter text-neutral-200">
       <Link as={`/blog/${slug}`} href="/blog/[slug]">
         {title}
       </Link>
     </h3>
-    <div className="text-lg mb-2 text-gray-400">
+    <div className="mb-2 text-lg text-neutral-400">
       <DateFormater dateString={date} />
     </div>
-    <p className="text-lg leading-relaxed mb-12">{excerpt}</p>
+    <p className="mb-12 text-lg leading-relaxed">{excerpt}</p>
   </div>
 );
 

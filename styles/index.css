@@ -2,11 +2,16 @@
 
 /* Write your own custom base styles here */
 @layer base {
+  html {
+    @apply bg-neutral-900;
+  }
+
+
   p,
   ul,
   ol,
   blockquote {
-    @apply font-sans mb-6;
+    @apply font-sans mb-6 text-neutral-200;
   }
 
 

@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import Avatar from "../components/Avatar";
-import DateFormater from "../components/date-formater";
+import DateFormatter from "../components/date-formater";
 import CoverImage from "../components/cover-image";
 
 export default function HeroPost({
@@ -17,19 +17,23 @@ export default function HeroPost({
       <div className="mb-8 md:mb-16">
         <CoverImage title={title} src={coverImage} slug={slug} />
       </div>
-      <div className="md:grid md:grid-cols-2 md:col-gap-16 lg:col-gap-8 mb-20 md:mb-28">
+      <div className="md:col-gap-16 lg:col-gap-8 mb-20 md:mb-28 md:grid md:grid-cols-2">
         <div>
-          <h3 className="mb-4 text-4xl lg:text-6xl leading-tight">
-            <Link as={`/blog/${slug}`} href="/blog/[slug]" className="hover:underline">
+          <h3 className="mb-4 text-4xl leading-tight lg:text-6xl">
+            <Link
+              as={`/blog/${slug}`}
+              href="/blog/[slug]"
+              className="hover:underline"
+            >
               {title}
             </Link>
           </h3>
-          <div className="mb-4 md:mb-0 text-lg">
-            <DateFormater dateString={date} />
+          <div className="mb-4 text-lg md:mb-0">
+            <DateFormatter dateString={date} />
           </div>
         </div>
         <div>
-          <p className="text-lg leading-relaxed mb-4">{excerpt}</p>
+          <p className="mb-4 text-lg leading-relaxed">{excerpt}</p>
           <Avatar name={author.name} picture={author.picture} />
         </div>
       </div>
