@@ -1,8 +1,9 @@
 import Link from "next/link";
 
 import Avatar from "../components/Avatar";
-import DateFormatter from "../components/date-formater";
 import CoverImage from "../components/cover-image";
+
+import DateFormatter from "./date-formatter";
 
 export default function HeroPost({
   title,

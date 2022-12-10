@@ -1,13 +1,15 @@
-import { useRouter } from "next/router";
+import { getMDXComponent } from "mdx-bundler/client";
 import ErrorPage from "next/error";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { useMemo } from "react";
+
 import Container from "../../components/Container";
 import Header from "../../components/header";
-import Layout from "../../components/Layout";
-import { getPostBySlug, getSortedPosts } from "../../lib/api";
 import PostTitle from "../../components/post-title";
-import { getMDXComponent } from "mdx-bundler/client";
-import { useMemo } from "react";
-import Head from "next/head";
+import { Layout } from "components";
+
+import { getPostBySlug, getSortedPosts } from "../../lib/api";
 
 export default function Post({ slug, frontmatter, code }) {
   const Component = useMemo(() => getMDXComponent(code), [code]);

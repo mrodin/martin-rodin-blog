@@ -1,5 +1,6 @@
-import DateFormater from "../components/date-formater";
 import Link from "next/link";
+
+import DateFormatter from "./date-formatter";
 
 const PostPreview = ({ title, date, excerpt, slug }) => (
   <div>
@@ -9,7 +10,7 @@ const PostPreview = ({ title, date, excerpt, slug }) => (
       </Link>
     </h3>
     <div className="mb-2 text-lg text-neutral-400">
-      <DateFormater dateString={date} />
+      <DateFormatter dateString={date} />
     </div>
     <p className="mb-12 text-lg leading-relaxed">{excerpt}</p>
   </div>

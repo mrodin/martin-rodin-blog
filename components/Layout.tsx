@@ -5,12 +5,10 @@ type Props = {
   children: React.ReactNode;
 };
 
-const Layout = ({ children }: Props) => (
+export const Layout = ({ children }: Props) => (
   <>
     <Meta />
     <div className="min-h-screen">{children}</div>
     <Footer />
   </>
 );
-
-export default Layout;

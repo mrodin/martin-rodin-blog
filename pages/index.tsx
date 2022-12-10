@@ -1,9 +1,11 @@
-import Container from "../components/Container";
-import MoreStories from "../components/more-stories";
-import Intro from "../components/Intro";
-import Layout from "../components/Layout";
-import { getSortedPosts } from "../lib/api";
 import Head from "next/head";
+
+import Container from "../components/Container";
+import Intro from "../components/Intro";
+import MoreStories from "../components/more-stories";
+import { Layout } from "components";
+
+import { getSortedPosts } from "../lib/api";
 
 import Post from "../types/post";
 
