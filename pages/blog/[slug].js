@@ -23,25 +23,23 @@ export default function Post({ slug, frontmatter, code }) {
 
   return (
     <Layout>
+      <Head>
+        <title>{title}</title>
+        <meta property="og:image" content={frontmatter.ogImage.url} />
+      </Head>
       <Container>
         <Header />
-        <>
-          <article className="mb-32">
-            <PostTitle>{frontmatter.title}</PostTitle>
-            <Component />
-            <Head>
-              <title>{title}</title>
-              <meta property="og:image" content={frontmatter.ogImage.url} />
-            </Head>
-            {/*<PostHeader*/}
-            {/*  title={post.title}*/}
-            {/*  coverImage={post.coverImage}*/}
-            {/*  date={post.date}*/}
-            {/*  author={post.author}*/}
-            {/*/>*/}
-            {/*<PostBody content={post.content} />*/}
-          </article>
-        </>
+        <article className="markdown mb-32">
+          <PostTitle>{frontmatter.title}</PostTitle>
+          <Component />
+          {/*<PostHeader*/}
+          {/*  title={post.title}*/}
+          {/*  coverImage={post.coverImage}*/}
+          {/*  date={post.date}*/}
+          {/*  author={post.author}*/}
+          {/*/>*/}
+          {/*<PostBody content={post.content} />*/}
+        </article>
       </Container>
     </Layout>
   );

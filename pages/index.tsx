@@ -1,9 +1,8 @@
 import Head from "next/head";
 
 import Container from "../components/Container";
-import Intro from "../components/Intro";
 import MoreStories from "../components/more-stories";
-import { Layout } from "components";
+import { IndexHeading, Layout } from "components";
 
 import { getSortedPosts } from "../lib/api";
 
@@ -19,7 +18,9 @@ const Index = ({ allPosts }: Props) => (
       <title>Martin Rodin - Front-end Web Developer</title>
     </Head>
     <Container>
-      <Intro />
+      <section className="mt-3 mb-12 flex md:mt-16">
+        <IndexHeading>Martin Rodin</IndexHeading>
+      </section>
       <MoreStories posts={allPosts} />
     </Container>
   </Layout>
