@@ -1,7 +1,14 @@
 import cn from "classnames";
 import Link from "next/link";
+import { FC } from "react";
 
-export default function CoverImage({ title, src, slug }) {
+type CoverImageProps = {
+  title: string;
+  src: string;
+  slug?: string;
+};
+
+export const CoverImage: FC<CoverImageProps> = ({ title, src, slug }) => {
   const image = (
     <img
       src={src}
@@ -22,4 +29,4 @@ export default function CoverImage({ title, src, slug }) {
       )}
     </div>
   );
-}
+};

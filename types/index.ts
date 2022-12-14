@@ -1,6 +1,9 @@
-import Author from "./author";
+export type Author = {
+  name: string;
+  picture: string;
+};
 
-type PostType = {
+export type Post = {
   slug: string;
   title: string;
   date: string;
@@ -12,5 +15,3 @@ type PostType = {
   };
   content: string;
 };
-
-export default PostType;

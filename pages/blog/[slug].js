@@ -6,8 +6,7 @@ import { useMemo } from "react";
 
 import Container from "../../components/Container";
 import Header from "../../components/header";
-import PostTitle from "../../components/post-title";
-import { Layout } from "components";
+import { Layout, PostHeader } from "components";
 
 import { getPostBySlug, getSortedPosts } from "../../lib/api";
 
@@ -30,14 +29,13 @@ export default function Post({ slug, frontmatter, code }) {
       <Container>
         <Header />
         <article className="markdown mb-32">
-          <PostTitle>{frontmatter.title}</PostTitle>
+          <PostHeader
+            title={frontmatter.title}
+            coverImage={frontmatter.coverImage}
+            date={frontmatter.date}
+            author={frontmatter.author}
+          />
           <Component />
-          {/*<PostHeader*/}
-          {/*  title={post.title}*/}
-          {/*  coverImage={post.coverImage}*/}
-          {/*  date={post.date}*/}
-          {/*  author={post.author}*/}
-          {/*/>*/}
           {/*<PostBody content={post.content} />*/}
         </article>
       </Container>
