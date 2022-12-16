@@ -8,7 +8,7 @@ import Container from "../../components/Container";
 import Header from "../../components/header";
 import { Layout, PostHeader } from "components";
 
-import { getPostBySlug, getSortedPosts } from "../../lib/api";
+import { getPostBySlug, getSortedPosts } from "../../core/api";
 
 export default function Post({ slug, frontmatter, code }) {
   const Component = useMemo(() => getMDXComponent(code), [code]);

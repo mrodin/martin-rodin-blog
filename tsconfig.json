@@ -18,6 +18,9 @@
       "components": [
         "./components"
       ],
+      "core/*": [
+        "./core/*"
+      ],
       "types": [
         "./types"
       ]

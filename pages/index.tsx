@@ -1,8 +1,11 @@
+import Head from "next/head";
+
 import Container from "../components/Container";
 import MoreStories from "../components/more-stories";
-import { getSortedPosts } from "../lib/api";
 import { IndexHeading, Layout } from "components";
-import Head from "next/head";
+
+import { getSortedPosts } from "../core/api";
+
 import { Post } from "types";
 
 type Props = {

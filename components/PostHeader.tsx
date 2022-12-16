@@ -3,7 +3,7 @@ import { FC } from "react";
 import { Author } from "types";
 
 import { CoverImage } from "./CoverImage";
-import DateFormatter from "./date-formatter";
+import Date from "./Date";
 import PostTitle from "./post-title";
 
 type PostHeaderProps = {
@@ -26,7 +26,7 @@ export const PostHeader: FC<PostHeaderProps> = ({
     </div>
     <div className="max-w-2xl mx-auto">
       <div className="mb-6 text-lg">
-        <DateFormatter dateString={date} />
+        <Date dateString={date} />
       </div>
     </div>
   </>

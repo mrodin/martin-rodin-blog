@@ -1,19 +1,23 @@
-import { FontSize, FontTracking, FontWeight, TextColor } from "core/theme";
 import { FC, ReactNode } from "react";
+
+import { FontSize, FontTracking, FontWeight, TextColor } from "core/theme";
 
 type TextProps = {
   children: ReactNode;
   color?: TextColor;
   tracking?: FontTracking;
-  transform?: "capitalize" | "uppercase" | "lowercase";
   size?: FontSize;
   weight?: FontWeight;
 };
 
 export const Text: FC<TextProps> = ({
   children,
-  color = TextColor.slate800,
+  color = TextColor.neutral200,
   tracking = FontTracking.normal,
-  size = FontSize.xs,
+  size = FontSize.lg,
   weight = FontWeight.normal,
-}) => <p className={`${size} ${weight} ${color} ${tracking}`}>{children}</p>;
+}) => (
+  <p className={`leading-relaxed ${size} ${weight} ${color} ${tracking}`}>
+    {children}
+  </p>
+);

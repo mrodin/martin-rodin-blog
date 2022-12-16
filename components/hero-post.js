@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import CoverImage from "./CoverImage";
-import DateFormatter from "./date-formatter";
+import Date from "./Date";
 
 export default function HeroPost({
   title,
@@ -28,7 +28,7 @@ export default function HeroPost({
             </Link>
           </h3>
           <div className="mb-4 text-lg md:mb-0">
-            <DateFormatter dateString={date} />
+            <Date dateString={date} />
           </div>
         </div>
         <div>
