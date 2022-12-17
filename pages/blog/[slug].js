@@ -4,9 +4,8 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useMemo } from "react";
 
-import Container from "../../components/Container";
 import Header from "../../components/header";
-import { Layout, PostHeader } from "components";
+import { Container, Layout, PostHeader } from "components";
 
 import { getPostBySlug, getSortedPosts } from "../../core/api";
 

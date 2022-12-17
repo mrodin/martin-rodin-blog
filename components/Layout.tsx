@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-import Footer from "./footer";
+import { Footer } from "./Footer";
 import Meta from "./meta";
 
 type LayoutProps = {

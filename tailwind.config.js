@@ -5,6 +5,8 @@ module.exports = {
   content: [
     "./components/**/*.js",
     "./components/**/*.tsx",
+    "./core/**/*.ts",
+    "./core/**/*.tsx",
     "./pages/**/*.js",
     "./pages/**/*.tsx",
   ],

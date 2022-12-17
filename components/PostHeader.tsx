@@ -3,7 +3,7 @@ import { FC } from "react";
 import { Author } from "types";
 
 import { CoverImage } from "./CoverImage";
-import Date from "./Date";
+import { Date } from "./Date";
 import PostTitle from "./post-title";
 
 type PostHeaderProps = {

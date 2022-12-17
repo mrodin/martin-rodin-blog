@@ -1,10 +1,9 @@
 import Head from "next/head";
 
-import Container from "../components/Container";
 import MoreStories from "../components/more-stories";
-import { IndexHeading, Layout } from "components";
+import { Container, IndexHeading, Layout } from "components";
 
-import { getSortedPosts } from "../core/api";
+import { getSortedPosts } from "core/api";
 
 import { Post } from "types";
 
