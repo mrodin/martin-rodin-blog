@@ -4,8 +4,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useMemo } from "react";
 
-import Header from "../../components/header";
-import { Container, Layout, PostHeader } from "components";
+import { Container, HomeLink, Layout, PostHeader } from "components";
 
 import { getPostBySlug, getSortedPosts } from "../../core/api";
 
@@ -26,7 +25,7 @@ export default function Post({ slug, frontmatter, code }) {
         <meta property="og:image" content={frontmatter.ogImage.url} />
       </Head>
       <Container>
-        <Header />
+        <HomeLink />
         <article className="markdown mb-32">
           <PostHeader
             title={frontmatter.title}

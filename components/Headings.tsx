@@ -13,9 +13,6 @@ export const IndexHeading: FC<HeadingProps> = ({ children }) => (
   </Link>
 );
 
-// TODO
-export const PostHeading: FC<HeadingProps> = ({ children }) => null;
-
 export const PostPreviewHeading: FC<HeadingProps> = ({ children }) => (
   <h2 className="mb-3 text-4xl font-bold leading-tight tracking-tighter text-neutral-200">
     {children}
