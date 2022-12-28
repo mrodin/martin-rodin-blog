@@ -1,8 +1,9 @@
 import fs from "fs";
-import path from "path";
 import { bundleMDX } from "mdx-bundler";
-import remarkEmbedder from "@remark-embedder/core";
+import path from "path";
 import rehypePrettyCode from "rehype-pretty-code";
+
+import remarkEmbedder from "@remark-embedder/core";
 
 const postsDirectory = path.join(process.cwd(), "posts");
 
@@ -23,7 +24,7 @@ export async function getSortedPosts() {
       frontmatter: post.frontmatter,
     }))
     .sort((post1, post2) =>
-      post1.frontmatter.date > post2.frontmatter.date ? -1 : 1
+      post1.frontmatter.date > post2.frontmatter.date ? -1 : 1,
     );
 }
 

@@ -43,7 +43,7 @@ If you want to get the project running on your computer, you are also going to n
 
 Let’s start with the top headlines page. This page gets pre-rendered on the server on every user visit to make sure that the data is always up to date.
 
-To do so, we need to export the `getServerSideProps` function from the respective page (index.js page in my example).
+To do so, we need to export the `getServerSideProps{:js}` function from the respective page (index.js page in my example).
 
 ```js
 // If the page exports getServerSideProps function,
@@ -59,7 +59,7 @@ export async function getServerSideProps() {
 }
 ```
 
-The `getTopHeadlines` function is a simple wrapper function around JS fetch. It looks like this:
+The `getTopHeadlines{:js}` function is a simple wrapper function around JS fetch. It looks like this:
 
 ```js
 export const getTopHeadlines = async () => {
@@ -77,7 +77,7 @@ export const getTopHeadlines = async () => {
 
 ## News sources page: Static generation
 
-Since the news sources rarely change, we are going to make this page completely static and generate it on build time. The way we do this is very similar to the previous example, but we are going to export `getStaticProps` function from the page instead of `getServerSideProps`.
+Since the news sources rarely change, we are going to make this page completely static and generate it on build time. The way we do this is very similar to the previous example, but we are going to export `getStaticProps{:js}` function from the page instead of `getServerSideProps{:js}`.
 
 ```js
 // getStaticProps function is going to run only
@@ -109,13 +109,13 @@ In the next section, I’m also going to show how to get around this drawback wi
 
 Last page we are going to build is a detail page for each news source. When visited, it is going to show the top headlines for each source. The difference with this page is that it uses a dynamic route. For example, if you want to see the top headlines of TechCrunch, it’s available on this URL (in development mode):
 
-`localhost:3000/source/techcrunch`
+`localhost:3000/source/techcrunch{:shell}`
 
 In Next.js we can create dynamic route using brackets, e.g.:
 
-`pages/source/[id].js`
+`pages/source/[id].js{:shell}`
 
-Now when we want to pre-render a dynamic route page using `getStaticProps`, we need to provide a complete list of static paths (all valid news sources) that Next.js should render during build time. We can do this with the `getStaticPaths` function.
+Now when we want to pre-render a dynamic route page using `getStaticProps{:js}`, we need to provide a complete list of static paths (all valid news sources) that Next.js should render during build time. We can do this with the `getStaticPaths{:js}` function.
 
 ```js
 export async function getStaticPaths() {
@@ -128,7 +128,7 @@ export async function getStaticPaths() {
 }
 ```
 
-In `getStaticPaths` we will firstly fetch all the news sources from an API to get the complete list of all of them and store them into a `sources` constant. Then we create a `paths` constant which will contain an array of objects with `params` key. In our case the `paths` array is going to look like this:
+In `getStaticPaths{:js}` we will firstly fetch all the news sources from an API to get the complete list of all of them and store them into a `sources{:js}` constant. Then we create a `paths{:js}` constant which will contain an array of objects with `params{:js}` key. In our case the `paths{:js}` array is going to look like this:
 
 ```js
 const paths = [
@@ -139,9 +139,9 @@ const paths = [
 ];
 ```
 
-This way Next.js will pre-render `source/engadget`, `source/hacker-news`, etc. using the dynamic page `pages/source/[id].js`. Note that the value for each `params` must match the parameter in the page name. In our case, we have a page called `[id].js`, so the key inside the `params` object must also be `id`.
+This way Next.js will pre-render `source/engadget{:shell}`, `source/hacker-news{:shell}`, etc. using the dynamic page `pages/source/[id].js{:shell}`. Note that the value for each `params{:js}` must match the parameter in the page name. In our case, we have a page called `[id].js{:shell}`, so the key inside the `params{:js}` object must also be `id{:js}`.
 
-Now that we have our `getStaticPaths` function, we will also need to export a `getStaticProps` function to tell Next.js that our source detail page should be statically pre-rendered during build time.
+Now that we have our `getStaticPaths{:js}` function, we will also need to export a `getStaticProps{:js}` function to tell Next.js that our source detail page should be statically pre-rendered during build time.
 
 ```js
 export async function getStaticProps({ params }) {
@@ -153,13 +153,13 @@ export async function getStaticProps({ params }) {
 }
 ```
 
-Notice that `getStaticProps` function takes parameter `context`, which we destructure to obtain a `params` object containing the route parameters for the page. In our case, the `params` will look like e.g. `{ id: engadget }`. So we can use the `params.id` to get the list of headlines from the corresponding news source.
+Notice that `getStaticProps{:js}` function takes parameter `context{:js}`, which we destructure to obtain a `params{:js}` object containing the route parameters for the page. In our case, the `params{:js}` will look like e.g. `{ id: engadget }{:js}`. So we can use the `params.id{:js}` to get the list of headlines from the corresponding news source.
 
 Well, this is going to work nicely, but we will soon encounter a problem with out of date headlines on our source detail pages since the data are generated only at build time. We are going to look at the solution to this problem in the next section.
 
 ### Incremental static regeneration
 
-Incremental static regeneration is a feature of Next.js that allows you to “re-generate” (meaning update) static pages as users visit your website. You can enable this feature in code using the `revalidate` parameter in the return of your `getStaticProps` function.
+Incremental static regeneration is a feature of Next.js that allows you to “re-generate” (meaning update) static pages as users visit your website. You can enable this feature in code using the `revalidate{:js}` parameter in the return of your `getStaticProps{:js}` function.
 
 ```js
 export async function getStaticProps({ params }) {

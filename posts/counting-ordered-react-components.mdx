@@ -34,7 +34,7 @@ Important here is the CSS style that we apply to this component:
 }
 ```
 
-The `counter-reset` CSS property creates a new counter called `card-order`. This counter will increment by 1 for each element with `counter-increment: card-order;` CSS property within the BoxArea component.
+The `counter-reset{:css}` CSS property creates a new counter called `card-order{:css}`. This counter will increment by 1 for each element with `counter-increment: card-order;{:css}` CSS property within the BoxArea component.
 
 Now it’s time to create the React component for the box. I have created a simple box component that looks like this:
 
@@ -60,7 +60,7 @@ const Box = ({ title, total }) => (
 );
 ```
 
-For now, let’s focus closely on the div element with `className=”order-number”`. Its CSS style looks like this:
+For now, let’s focus closely on the div element with `className=”order-number”{:html}`. Its CSS style looks like this:
 
 ```css
 .order-number {
@@ -72,9 +72,9 @@ For now, let’s focus closely on the div element with `className=”order-numbe
 }
 ```
 
-The `counter-increment: card-order` property increases the `card-order` counter by one each time an element with `order-number` CSS class appears on the screen. That’s why it’s important to apply this property to the element within the box.
+The `counter-increment: card-order{:css}` property increases the `card-order{:css}` counter by one each time an element with `order-number{:css}` CSS class appears on the screen. That’s why it’s important to apply this property to the element within the box.
 
-The `content` property is responsible for displaying the order number of the box. It’s important to use `::before` selector here as the content property can only be used on `::before` or `::after` pseudo-elements.
+The `content{:css}` property is responsible for displaying the order number of the box. It’s important to use `::before{:css}` selector here as the content property can only be used on `::before{:css}` or `::after{:css}` pseudo-elements.
 
 ## Creating a custom React hook to count the total number of boxes
 

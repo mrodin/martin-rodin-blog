@@ -10,7 +10,7 @@ ogImage:
     url: "/assets/blog/covers/nextjs-how-to-put-nonpage-files-into-pages-directory.jpg"
 ---
 
-One thing that always bugged me about Next.js was the fact that I was unable to collocate my code with the particular route in the `pages` directory. It was a long standing rule that you shouldn’t put any non-page files in your `pages` folder because Next.js automatically treats every file there as a new route.
+One thing that always bugged me about Next.js was the fact that I was unable to collocate my code with the particular route in the `pages{:shell}` directory. It was a long standing rule that you shouldn’t put any non-page files in your `pages{:shell}` folder because Next.js automatically treats every file there as a new route.
 
 But now it seems that you can define custom page extensions that allow you to collocate your module files with the route they belong to.
 
@@ -51,13 +51,13 @@ Is there a way to collocate the module files with the page file? Let’s find ou
 
 ## Next.js custom page extensions
 
-To be able to put non-page files into the `pages` directory, you need to tell Next.js how to differentiate between pages and the rest of the files. You can do this in the `next.config.js` file. If this file doesn’t exist in your project yet, simply create it in the root folder (next to `package.json` file) using `touch` command:
+To be able to put non-page files into the `pages{:shell}` directory, you need to tell Next.js how to differentiate between pages and the rest of the files. You can do this in the `next.config.js{:shell}` file. If this file doesn’t exist in your project yet, simply create it in the root folder (next to `package.json{:shell}` file) using `touch{:shell}` command:
 
 ```shell
 touch next.config.js
 ```
 
-Then we would like to specify that only files with `.page.tsx|ts|jsx|js` extensions (for example `products.page.tsx`) should be considered page files. Add this configuration into your `next.config.js` file:
+Then we would like to specify that only files with `.page.tsx|ts|jsx|js{:shell}` extensions (for example `products.page.tsx{:shell}`) should be considered page files. Add this configuration into your `next.config.js{:shell}` file:
 
 ```js
 module.exports = {
@@ -85,6 +85,6 @@ With this configuration, we can collocate all the module files into one folder. 
        |- selectors.ts
 ```
 
-We moved all our module files into the pages folder and defined `index.page.ts` as our page file.
+We moved all our module files into the pages folder and defined `index.page.ts{:shell}` as our page file.
 
 Hope this little tip made your work with Next.js more pleasant!

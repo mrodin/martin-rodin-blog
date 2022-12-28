@@ -41,7 +41,7 @@ There are several things we want to achieve:
 
 ## Applying styles on component hover
 
-This is the easiest part as we can use the `:hover` pseudo-class:
+This is the easiest part as we can use the `:hover{:css}` pseudo-class:
 
 ```css
 .card:hover {
@@ -55,7 +55,7 @@ This is the easiest part as we can use the `:hover` pseudo-class:
 
 ## Using focus-within pseudo-class
 
-To give the Card the same style when one of its input fields have focus, we can use another pseudo-class called :focus-within:
+To give the Card the same style when one of its input fields have focus, we can use another pseudo-class called `:focus-within{:css}`:
 
 ```css
 .card:hover,
@@ -70,11 +70,11 @@ To give the Card the same style when one of its input fields have focus, we can 
 
 This pseudo-class represents an element that received focus or has a nested element with focus, which is exactly our case.
 
-As for the browser compatibility, `:focus-within` is available in all modern browsers except for Internet Explorer.
+As for the browser compatibility, `:focus-within{:css}` is available in all modern browsers except for Internet Explorer.
 
 ## Making Card component focusable
 
-Normally `<div>` elements cannot receive focus either from keyboard events (through tab key) or from mouse clicks. To make the `<div>` element focusable, we need to add `tabIndex={0}` attribute to it.
+Normally `<div>{:html}` elements cannot receive focus either from keyboard events (through tab key) or from mouse clicks. To make the `<div>{:html}` element focusable, we need to add `tabIndex={0}{:html}` attribute to it.
 
 ```html
 <div className="card" tabindex="{0}">...</div>
