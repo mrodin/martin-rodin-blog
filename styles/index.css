@@ -61,15 +61,15 @@
   }
 
   .markdown h2 {
-    @apply font-medium text-3xl mt-12 mb-4 leading-tight;
+    @apply font-medium text-3xl mt-12 mb-4 leading-tight text-neutral-200;
   }
 
   .markdown h3 {
-    @apply font-medium text-2xl mt-12 mb-4 leading-tight;
+    @apply font-medium text-2xl mt-12 mb-4 leading-tight text-neutral-200;
   }
 
   .markdown [data-rehype-pretty-code-fragment] {
-    @apply bg-neutral-700 mb-6 p-4 rounded-xl;
+    @apply bg-neutral-900 mb-6 p-4 rounded-xl;
   }
 
   .markdown code {
@@ -81,17 +81,10 @@
   }
 }
 
-/* Start purging... */
 @tailwind components;
-/* Stop purging. */
 
-/* Write you own custom component styles here */
-
-/* Start purging... */
 @tailwind utilities;
-/* Stop purging. */
 
-/* Your own custom utilities */
 @layer utilities {
   .gradient-title {
     @apply bg-gradient-to-r from-pink-400 via-blue-400 to-green-400 bg-clip-text text-transparent;

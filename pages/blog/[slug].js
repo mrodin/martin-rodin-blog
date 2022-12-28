@@ -6,9 +6,9 @@ import { useMemo } from "react";
 
 import { Container, HomeLink, Layout, PostHeader } from "components";
 
-import { getPostBySlug, getSortedPosts } from "../../core/api";
+import { getPostBySlug, getSortedPosts } from "core/api";
 
-export default function Post({ slug, frontmatter, code }) {
+const Post = ({ slug, frontmatter, code }) => {
   const Component = useMemo(() => getMDXComponent(code), [code]);
 
   const router = useRouter();
@@ -26,20 +26,19 @@ export default function Post({ slug, frontmatter, code }) {
       </Head>
       <Container>
         <HomeLink />
+        <PostHeader
+          title={frontmatter.title}
+          coverImage={frontmatter.coverImage}
+          date={frontmatter.date}
+          author={frontmatter.author}
+        />
         <article className="markdown mb-32">
-          <PostHeader
-            title={frontmatter.title}
-            coverImage={frontmatter.coverImage}
-            date={frontmatter.date}
-            author={frontmatter.author}
-          />
           <Component />
-          {/*<PostBody content={post.content} />*/}
         </article>
       </Container>
     </Layout>
   );
-}
+};
 
 export async function getStaticProps({ params }) {
   const postData = await getPostBySlug(params.slug);
@@ -62,3 +61,5 @@ export async function getStaticPaths() {
     fallback: false,
   };
 }
+
+export default Post;

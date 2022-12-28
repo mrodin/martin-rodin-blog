@@ -6,7 +6,7 @@ import { Container } from "./Container";
 import { Text } from "./Text";
 
 export const Footer: FC = () => (
-  <footer className="bg-neutral-700">
+  <footer className="bg-neutral-900">
     <Container>
       <div className="py-6 flex justify-center">
         <Text
