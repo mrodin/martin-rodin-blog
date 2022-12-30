@@ -45,10 +45,6 @@
     left: -30px;
   }
 
-  pre {
-    overflow: hidden;
-  }
-
   .markdown {
     @apply text-lg leading-relaxed;
   }
@@ -69,7 +65,7 @@
   }
 
   .markdown [data-rehype-pretty-code-fragment] > pre {
-    @apply bg-neutral-900 mb-6 p-4 rounded-xl;
+    @apply bg-neutral-900 mb-6 p-4 rounded-xl overflow-x-auto;
   }
 
   .markdown code {
